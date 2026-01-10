@@ -1,7 +1,6 @@
 package com.flowpipes.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 
 public class PipeBlocks {
 	public static Block ITEM_PIPE_WOOD;

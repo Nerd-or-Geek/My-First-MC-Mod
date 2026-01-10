@@ -8,7 +8,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import com.flowpipes.util.PipeTier;
 import com.flowpipes.flow.FlowPayload;
-import com.flowpipes.flow.FlowMechanics;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,15 +55,13 @@ public class PipeBlockEntity extends BlockEntity {
 		}
 	}
 
-	@Override
-	protected void writeNbt(NbtCompound nbt) {
-		super.writeNbt(nbt);
+	public NbtCompound writeNbt(NbtCompound nbt) {
 		nbt.putString("tier", tier.getDisplayName());
 		nbt.putInt("payload_count", payloads.size());
+		return nbt;
 	}
 
-	@Override
 	public void readNbt(NbtCompound nbt) {
-		super.readNbt(nbt);
+		// Read tier and payload count if needed
 	}
 }

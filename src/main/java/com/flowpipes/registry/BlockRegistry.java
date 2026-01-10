@@ -1,7 +1,6 @@
 package com.flowpipes.registry;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -51,6 +50,6 @@ public class BlockRegistry {
 
 	private static Block registerBlock(String name, Block block) {
 		return Registry.register(Registries.BLOCK, 
-			new Identifier(FlowPipesMod.MOD_ID, name), block);
+			Identifier.of(FlowPipesMod.MOD_ID, name), block);
 	}
 }

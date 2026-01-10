@@ -6,6 +6,7 @@ import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
@@ -33,17 +34,15 @@ public class SorterBlock extends BlockWithEntity {
 			.strength(2.0f, 8.0f)
 			.nonOpaque());
 		this.tier = tier;
-		setDefaultState(getDefaultState()
-			.with(NORTH, false)
-			.with(SOUTH, false)
-			.with(EAST, false)
-			.with(WEST, false)
-			.with(UP, false)
-			.with(DOWN, false));
 	}
 
 	public PipeTier getTier() {
 		return tier;
+	}
+
+	@Override
+	protected MapCodec<? extends BlockWithEntity> getCodec() {
+		throw new UnsupportedOperationException("SorterBlock does not support codec");
 	}
 
 	@Override
@@ -73,6 +72,10 @@ public class SorterBlock extends BlockWithEntity {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-		return world.isClient ? null : checkType(type, null, SorterBlockEntity::tick);
+		return world.isClient ? null : (world2, pos, state2, blockEntity) -> {
+			if (blockEntity instanceof SorterBlockEntity sorter) {
+				SorterBlockEntity.tick(world2, pos, state2, sorter);
+			}
+		};
 	}
 }

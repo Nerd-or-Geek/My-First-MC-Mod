@@ -5,13 +5,10 @@ import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import com.flowpipes.screen.SorterScreenHandler;
 import com.flowpipes.blockentity.SorterBlockEntity;
-import com.flowpipes.FlowPipesMod;
 
 public class SorterScreen extends HandledScreen<SorterScreenHandler> {
-	private static final Identifier TEXTURE = new Identifier(FlowPipesMod.MOD_ID, "textures/gui/sorter_gui.png");
 	private ButtonWidget modeButton;
 
 	public SorterScreen(SorterScreenHandler handler, PlayerInventory inventory, Text component) {
@@ -53,6 +50,6 @@ public class SorterScreen extends HandledScreen<SorterScreenHandler> {
 	protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
 		int x = (this.width - this.backgroundWidth) / 2;
 		int y = (this.height - this.backgroundHeight) / 2;
-		context.drawTexture(TEXTURE, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
+		context.fill(x, y, x + this.backgroundWidth, y + this.backgroundHeight, 0xFF202020);
 	}
 }

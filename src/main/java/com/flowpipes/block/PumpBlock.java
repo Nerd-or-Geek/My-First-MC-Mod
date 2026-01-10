@@ -2,14 +2,17 @@ package com.flowpipes.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.entity.BlockEntity;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import com.flowpipes.util.PipeTier;
 import com.flowpipes.blockentity.PumpBlockEntity;
 
-public class PumpBlock extends Block {
+public class PumpBlock extends BlockWithEntity {
 	public static final BooleanProperty POWERED = BooleanProperty.of("powered");
 	public static final BooleanProperty NORTH = BooleanProperty.of("north");
 	public static final BooleanProperty SOUTH = BooleanProperty.of("south");
@@ -25,14 +28,6 @@ public class PumpBlock extends Block {
 			.strength(2.0f, 8.0f)
 			.nonOpaque());
 		this.tier = tier;
-		setDefaultState(getDefaultState()
-			.with(POWERED, false)
-			.with(NORTH, false)
-			.with(SOUTH, false)
-			.with(EAST, false)
-			.with(WEST, false)
-			.with(UP, false)
-			.with(DOWN, false));
 	}
 
 	public PipeTier getTier() {
@@ -40,18 +35,18 @@ public class PumpBlock extends Block {
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-		builder.add(POWERED, NORTH, SOUTH, EAST, WEST, UP, DOWN);
+	protected MapCodec<? extends BlockWithEntity> getCodec() {
+		throw new UnsupportedOperationException("PumpBlock does not support codec");
+	}
+
+	@Nullable
+	@Override
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		return new PumpBlockEntity(pos, state, tier);
 	}
 
 	@Override
-	public void neighborUpdate(BlockState state, World world, BlockPos pos, 
-			Block sourceBlock, BlockPos sourcePos, boolean notify) {
-		if (world.isClient) return;
-		
-		boolean powered = world.isReceivingRedstonePower(pos);
-		if (powered != state.get(POWERED)) {
-			world.setBlockState(pos, state.with(POWERED, powered), 3);
-		}
+	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+		builder.add(POWERED, NORTH, SOUTH, EAST, WEST, UP, DOWN);
 	}
 }

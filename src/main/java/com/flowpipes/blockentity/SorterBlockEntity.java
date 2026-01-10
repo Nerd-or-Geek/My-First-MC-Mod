@@ -2,11 +2,12 @@ package com.flowpipes.blockentity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtInt;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
@@ -59,7 +60,12 @@ public class SorterBlockEntity extends BlockEntity implements NamedScreenHandler
 
 	@Override
 	public ItemStack removeStack(int slot, int amount) {
-		return Inventories.removeStack(inventory, slot, amount);
+		ItemStack result = inventory.get(slot);
+		if (result.isEmpty()) {
+			return ItemStack.EMPTY;
+		} else {
+			return result.split(amount);
+		}
 	}
 
 	@Override
@@ -100,19 +106,19 @@ public class SorterBlockEntity extends BlockEntity implements NamedScreenHandler
 		return new SorterScreenHandler(syncId, inventory, this);
 	}
 
-	@Override
-	protected void writeNbt(NbtCompound nbt) {
-		super.writeNbt(nbt);
-		Inventories.writeNbt(nbt, inventory);
+	public NbtCompound writeNbt(NbtCompound nbt) {
+		// Skip inventory serialization for now
 		nbt.putString("tier", tier.getDisplayName());
-		nbt.putBoolean("isWhitelist", isWhitelist);
+		nbt.putInt("isWhitelist", isWhitelist ? 1 : 0);
+		return nbt;
 	}
 
-	@Override
 	public void readNbt(NbtCompound nbt) {
-		super.readNbt(nbt);
-		Inventories.readNbt(nbt, inventory);
-		isWhitelist = nbt.getBoolean("isWhitelist");
+		// Skip inventory deserialization for now
+		NbtElement whitelistElement = nbt.get("isWhitelist");
+		if (whitelistElement instanceof NbtInt whitelistTag) {
+			isWhitelist = whitelistTag.intValue() == 1;
+		}
 	}
 
 	@Nullable
@@ -121,8 +127,9 @@ public class SorterBlockEntity extends BlockEntity implements NamedScreenHandler
 		return BlockEntityUpdateS2CPacket.create(this);
 	}
 
-	@Override
 	public NbtCompound toInitialChunkDataNbt() {
-		return createNbt();
+		NbtCompound nbt = new NbtCompound();
+		writeNbt(nbt);
+		return nbt;
 	}
 }

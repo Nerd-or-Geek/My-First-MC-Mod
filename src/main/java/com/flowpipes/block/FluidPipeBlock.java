@@ -28,13 +28,6 @@ public class FluidPipeBlock extends Block {
 			.strength(1.5f, 6.0f)
 			.nonOpaque());
 		this.tier = tier;
-		setDefaultState(getDefaultState()
-			.with(NORTH, false)
-			.with(SOUTH, false)
-			.with(EAST, false)
-			.with(WEST, false)
-			.with(UP, false)
-			.with(DOWN, false));
 	}
 
 	public PipeTier getTier() {

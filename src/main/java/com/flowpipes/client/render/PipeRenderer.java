@@ -1,6 +1,5 @@
 package com.flowpipes.client.render;
 
-import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.client.world.ClientWorld;
 
 public class PipeRenderer {
