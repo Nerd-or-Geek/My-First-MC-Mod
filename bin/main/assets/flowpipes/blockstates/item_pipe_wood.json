@@ -1,13 +1,5 @@
 {
   "variants": {
-    "north=false,south=false,east=false,west=false,up=false,down=false": {"model": "flowpipes:block/item_pipe_wood"},
-    "north=true,south=false,east=false,west=false,up=false,down=false": {"model": "flowpipes:block/item_pipe_wood"},
-    "north=false,south=true,east=false,west=false,up=false,down=false": {"model": "flowpipes:block/item_pipe_wood"},
-    "north=true,south=true,east=false,west=false,up=false,down=false": {"model": "flowpipes:block/item_pipe_wood"},
-    "north=false,south=false,east=true,west=false,up=false,down=false": {"model": "flowpipes:block/item_pipe_wood", "y": 90},
-    "north=false,south=false,east=false,west=true,up=false,down=false": {"model": "flowpipes:block/item_pipe_wood", "y": 90},
-    "north=false,south=false,east=true,west=true,up=false,down=false": {"model": "flowpipes:block/item_pipe_wood", "y": 90},
-    "north=false,south=false,east=false,west=false,up=true,down=false": {"model": "flowpipes:block/item_pipe_wood", "x": 90},
-    "north=false,south=false,east=false,west=false,up=false,down=true": {"model": "flowpipes:block/item_pipe_wood", "x": 270}
+    "": {"model": "flowpipes:block/item_pipe_wood"}
   }
 }

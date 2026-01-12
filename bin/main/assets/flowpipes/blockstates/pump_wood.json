@@ -1,6 +1,6 @@
 {
   "variants": {
-    "powered=false,north=false,south=false,east=false,west=false,up=false,down=false": {"model": "flowpipes:block/pump_wood"},
-    "powered=true,north=false,south=false,east=false,west=false,up=false,down=false": {"model": "flowpipes:block/pump_wood_active"}
+    "powered=false": {"model": "flowpipes:block/pump_wood"},
+    "powered=true": {"model": "flowpipes:block/pump_wood_active"}
   }
 }

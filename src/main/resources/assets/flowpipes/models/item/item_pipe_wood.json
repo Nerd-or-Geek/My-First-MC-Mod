@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "flowpipes:item/item_pipe_wood"
+    "layer0": "flowpipes:block/item_pipe_wood"
   }
 }

@@ -1,8 +1,5 @@
 {
   "variants": {
-    "north=false,south=false,east=false,west=false,up=false,down=false": {"model": "flowpipes:block/item_pipe_iron"},
-    "north=true,south=false,east=false,west=false,up=false,down=false": {"model": "flowpipes:block/item_pipe_iron"},
-    "north=false,south=true,east=false,west=false,up=false,down=false": {"model": "flowpipes:block/item_pipe_iron"},
-    "north=true,south=true,east=false,west=false,up=false,down=false": {"model": "flowpipes:block/item_pipe_iron"}
+    "": {"model": "flowpipes:block/item_pipe_iron"}
   }
 }

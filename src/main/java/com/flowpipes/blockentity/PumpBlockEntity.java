@@ -2,8 +2,10 @@ package com.flowpipes.blockentity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.math.BlockPos;
 import com.flowpipes.util.PipeTier;
+import com.flowpipes.registry.BlockEntityRegistry;
 
 public class PumpBlockEntity extends BlockEntity {
 	private PipeTier tier;
@@ -11,7 +13,7 @@ public class PumpBlockEntity extends BlockEntity {
 	private boolean waterWheelActive = false;
 
 	public PumpBlockEntity(BlockPos pos, BlockState state, PipeTier tier) {
-		super(null, pos, state);
+		super(BlockEntityRegistry.PUMP_ENTITY, pos, state);
 		this.tier = tier;
 	}
 

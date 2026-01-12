@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import com.flowpipes.util.PipeTier;
 import com.flowpipes.screen.SorterScreenHandler;
+import com.flowpipes.registry.BlockEntityRegistry;
 
 public class SorterBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, Inventory {
 	private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
@@ -27,7 +28,7 @@ public class SorterBlockEntity extends BlockEntity implements NamedScreenHandler
 	private boolean isWhitelist = true;
 
 	public SorterBlockEntity(BlockPos pos, BlockState state, PipeTier tier) {
-		super(null, pos, state);
+		super(BlockEntityRegistry.SORTER_ENTITY, pos, state);
 		this.tier = tier;
 	}
 

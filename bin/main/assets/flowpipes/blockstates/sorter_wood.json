@@ -1,5 +1,5 @@
 {
   "variants": {
-    "north=false,south=false,east=false,west=false,up=false,down=false": {"model": "flowpipes:block/sorter_wood"}
+    "": {"model": "flowpipes:block/sorter_wood"}
   }
 }

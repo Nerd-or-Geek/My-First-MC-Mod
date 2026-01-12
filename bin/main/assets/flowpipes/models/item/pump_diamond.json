@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "flowpipes:item/pump_diamond"
+    "layer0": "flowpipes:block/pump_diamond"
   }
 }
